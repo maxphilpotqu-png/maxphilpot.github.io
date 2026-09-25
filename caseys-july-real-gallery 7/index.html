@@ -1,0 +1,1285 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Casey's | Modern Irish Pub in Somerville, MA</title>
+  <meta name="description" content="Casey's is a modern Irish pub and neighborhood sports bar in Somerville, MA. Browse our beer and food menu, see the space, read our 32-year story, and shop merch.">
+
+  <style>
+    :root {
+      --cream: oklch(0.955 0.022 92.5);
+      --cream-soft: oklch(0.910 0.033 91.7);
+      --cream-deep: oklch(0.864 0.044 91.3);
+      --ink: oklch(0.220 0.030 172.5);
+      --emerald: oklch(0.517 0.099 169.8);
+      --emerald-deep: oklch(0.378 0.073 168.9);
+      --emerald-ink: oklch(0.298 0.055 171.9);
+      --gold: oklch(0.743 0.117 89.5);
+      --border: oklch(0.955 0.022 92.5 / 12%);
+      --ease-out: cubic-bezier(0.32, 0.72, 0, 1);
+    }
+
+    * {
+      box-sizing: border-box;
+    }
+
+    html {
+      scroll-behavior: smooth;
+    }
+
+    body {
+      margin: 0;
+      background: var(--ink);
+      color: var(--cream);
+      font-family: "Trebuchet MS", Arial, sans-serif;
+      overflow-x: hidden;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      display: block;
+    }
+
+    .page-bg {
+      position: fixed;
+      inset: 0;
+      z-index: -20;
+      background: var(--emerald-ink);
+    }
+
+    .ambient-glow {
+      position: fixed;
+      pointer-events: none;
+      z-index: -10;
+      border-radius: 9999px;
+      filter: blur(120px);
+    }
+
+    .glow-1 {
+      width: 46vw;
+      height: 46vw;
+      top: -12vw;
+      right: 8vw;
+      background: oklch(0.517 0.099 169.8 / 25%);
+    }
+
+    .glow-2 {
+      width: 42vw;
+      height: 42vw;
+      bottom: -14vw;
+      left: 2vw;
+      background: oklch(0.743 0.117 89.5 / 15%);
+    }
+
+    .glow-3 {
+      width: 34vw;
+      height: 34vw;
+      top: 38%;
+      left: 42%;
+      background: oklch(0.517 0.099 169.8 / 15%);
+    }
+
+    .container {
+      width: min(1240px, calc(100% - 48px));
+      margin: 0 auto;
+    }
+
+    .display {
+      font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;
+    }
+
+    .mono {
+      font-family: "Courier New", monospace;
+    }
+
+    .eyebrow {
+      font-family: "Courier New", monospace;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.28em;
+      color: oklch(0.743 0.117 89.5 / 80%);
+    }
+
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 40;
+      border-bottom: 1px solid oklch(0.955 0.022 92.5 / 10%);
+      background: oklch(0.298 0.055 171.9 / 80%);
+      backdrop-filter: blur(18px);
+    }
+
+    .nav-inner {
+      min-height: 70px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: baseline;
+      gap: 12px;
+    }
+
+    .brand-name {
+      font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;
+      font-size: 21px;
+      font-weight: 700;
+    }
+
+    .brand-sub {
+      font-family: "Courier New", monospace;
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.22em;
+      opacity: 0.5;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 32px;
+      font-size: 14px;
+      color: oklch(0.955 0.022 92.5 / 70%);
+    }
+
+    .nav-links a {
+      transition: color 0.2s ease;
+    }
+
+    .nav-links a:hover {
+      color: var(--gold);
+    }
+
+    .pill {
+      display: inline-block;
+      border: 1px solid oklch(0.743 0.117 89.5 / 50%);
+      border-radius: 999px;
+      padding: 10px 16px;
+      font-family: "Courier New", monospace;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+      color: var(--gold);
+      transition: 0.25s ease;
+    }
+
+    .pill:hover {
+      background: var(--gold);
+      color: var(--emerald-ink);
+    }
+
+    .hero {
+      display: grid;
+      grid-template-columns: 7fr 5fr;
+      gap: 32px;
+      padding: 96px 0;
+      align-items: stretch;
+    }
+
+    h1, h2, h3, h4, p {
+      margin-top: 0;
+    }
+
+    h1 {
+      margin: 16px 0 0;
+      font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;
+      font-size: clamp(3rem, 7.5vw, 6.5rem);
+      line-height: 1.02;
+      letter-spacing: -0.035em;
+    }
+
+    h1 em {
+      color: var(--gold);
+      font-weight: 700;
+    }
+
+    .hero-copy {
+      margin-top: 32px;
+      max-width: 46ch;
+      font-size: 18px;
+      line-height: 1.75;
+      color: oklch(0.955 0.022 92.5 / 70%);
+    }
+
+    .button-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 16px;
+      margin-top: 40px;
+    }
+
+    .button {
+      border-radius: 999px;
+      padding: 13px 24px;
+      font-family: "Courier New", monospace;
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      transition: transform 0.45s var(--ease-out), background 0.2s ease, border-color 0.2s ease;
+    }
+
+    .button:hover {
+      transform: translateY(-4px);
+    }
+
+    .button-primary {
+      background: var(--gold);
+      color: var(--emerald-ink);
+    }
+
+    .button-primary:hover {
+      background: var(--cream);
+    }
+
+    .button-secondary {
+      border: 1px solid oklch(0.955 0.022 92.5 / 25%);
+    }
+
+    .button-secondary:hover {
+      border-color: oklch(0.955 0.022 92.5 / 60%);
+    }
+
+    .glass-card {
+      height: 100%;
+      border: 1px solid oklch(0.955 0.022 92.5 / 15%);
+      border-radius: 24px;
+      background: oklch(0.955 0.022 92.5 / 10%);
+      padding: 24px;
+      backdrop-filter: blur(18px);
+    }
+
+    .hours-head,
+    .menu-head,
+    .stat-row,
+    .product-head {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 16px;
+    }
+
+    .hours-head {
+      border-bottom: 1px solid oklch(0.955 0.022 92.5 / 15%);
+      padding-bottom: 16px;
+    }
+
+    .small-label {
+      font-family: "Courier New", monospace;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.24em;
+      color: oklch(0.955 0.022 92.5 / 60%);
+    }
+
+    .open-now {
+      font-family: "Courier New", monospace;
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+      color: #86efac;
+    }
+
+    .hours-list {
+      margin: 20px 0 0;
+    }
+
+    .hour-row {
+      display: flex;
+      justify-content: space-between;
+      gap: 16px;
+      margin: 12px 0;
+      font-size: 14px;
+    }
+
+    .hour-row dt {
+      color: oklch(0.955 0.022 92.5 / 60%);
+    }
+
+    .hour-row dd {
+      margin: 0;
+      font-family: "Courier New", monospace;
+    }
+
+    .live-box {
+      margin-top: 24px;
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      border-radius: 12px;
+      padding: 12px 16px;
+      background: oklch(0.378 0.073 168.9 / 50%);
+    }
+
+    .live-box strong {
+      font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;
+      font-size: 18px;
+      color: var(--gold);
+    }
+
+    .live-box span {
+      font-size: 14px;
+      color: oklch(0.955 0.022 92.5 / 70%);
+    }
+
+    section {
+      scroll-margin-top: 90px;
+    }
+
+    .section-pad {
+      padding: 64px 0;
+    }
+
+    .menu-card {
+      border: 1px solid var(--border);
+      border-radius: 28px;
+      background: oklch(0.955 0.022 92.5 / 7%);
+      padding: 48px;
+      backdrop-filter: blur(18px);
+    }
+
+    .menu-head {
+      align-items: end;
+      border-bottom: 1px solid oklch(0.955 0.022 92.5 / 15%);
+      padding-bottom: 24px;
+    }
+
+    h2 {
+      margin: 12px 0 0;
+      font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;
+      font-size: clamp(2rem, 4vw, 2.6rem);
+      letter-spacing: -0.025em;
+    }
+
+    .menu-grid {
+      margin-top: 32px;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 40px;
+    }
+
+    .menu-section h3 {
+      margin-bottom: 8px;
+      font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;
+      font-size: 19px;
+      font-style: italic;
+      color: var(--gold);
+    }
+
+    .menu-note {
+      max-width: 38ch;
+      font-size: 14px;
+      line-height: 1.6;
+      color: oklch(0.955 0.022 92.5 / 50%);
+    }
+
+    .menu-section ul {
+      list-style: none;
+      padding: 0;
+      margin: 18px 0 0;
+    }
+
+    .menu-section li {
+      margin: 12px 0;
+      line-height: 1.35;
+      display: flex;
+      align-items: baseline;
+      gap: 10px;
+    }
+
+    .menu-section li .item-name { flex: 1; }
+    .menu-section li .menu-price {
+      flex: 0 0 auto;
+      font-family: "Courier New", monospace;
+      font-size: 13px;
+      font-weight: 700;
+      color: var(--gold);
+    }
+
+    .menu-special {
+      margin-top: 22px;
+      padding: 18px;
+      border: 1px solid rgba(255,255,255,.18);
+      border-radius: 14px;
+      background: rgba(255,255,255,.05);
+    }
+    .menu-special strong { color: var(--gold); }
+
+    .detail {
+      margin-left: 8px;
+      font-family: "Courier New", monospace;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.12em;
+      color: oklch(0.955 0.022 92.5 / 45%);
+    }
+
+    .gallery-title {
+      max-width: 16ch;
+    }
+
+    .gallery-grid {
+      margin-top: 32px;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      grid-auto-rows: 150px;
+      gap: 12px;
+    }
+
+    .gallery-item {
+      overflow: hidden;
+      border-radius: 16px;
+      outline: 1px solid oklch(0.955 0.022 92.5 / 10%);
+      outline-offset: -1px;
+      background: oklch(0.378 0.073 168.9 / 40%);
+    }
+
+    .g-big {
+      grid-column: span 2;
+      grid-row: span 2;
+    }
+
+    .g-wide {
+      grid-column: span 2;
+    }
+
+    .story {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 40px;
+      align-items: center;
+      padding: 32px 0 64px;
+    }
+
+    .story-image {
+      aspect-ratio: 4 / 5;
+      overflow: hidden;
+      border-radius: 24px;
+      outline: 1px solid oklch(0.955 0.022 92.5 / 10%);
+      outline-offset: -1px;
+      background: oklch(0.378 0.073 168.9 / 40%);
+    }
+
+    .story-copy {
+      margin-top: 24px;
+      max-width: 50ch;
+      line-height: 1.75;
+      color: oklch(0.955 0.022 92.5 / 70%);
+    }
+
+    .stats {
+      margin-top: 32px;
+      padding-top: 24px;
+      border-top: 1px solid oklch(0.955 0.022 92.5 / 15%);
+      display: flex;
+      gap: 40px;
+      flex-wrap: wrap;
+    }
+
+    .stat-number {
+      font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;
+      font-size: 32px;
+      font-weight: 700;
+      color: var(--gold);
+    }
+
+    .stat-label {
+      margin-top: 4px;
+      font-family: "Courier New", monospace;
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+      color: oklch(0.955 0.022 92.5 / 50%);
+    }
+
+    .merch-grid {
+      margin-top: 32px;
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 20px;
+    }
+
+    .product {
+      border: 1px solid var(--border);
+      border-radius: 20px;
+      background: oklch(0.955 0.022 92.5 / 7%);
+      padding: 16px;
+      backdrop-filter: blur(18px);
+      transition: transform 0.45s var(--ease-out);
+    }
+
+    .product:hover {
+      transform: translateY(-4px);
+    }
+
+    .product-image {
+      aspect-ratio: 1 / 1;
+      overflow: hidden;
+      border-radius: 16px;
+      background: oklch(0.378 0.073 168.9 / 40%);
+    }
+
+    .product-head {
+      align-items: start;
+      margin-top: 16px;
+    }
+
+    .product h3 {
+      margin: 0;
+      font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;
+      font-size: 16px;
+    }
+
+    .price {
+      font-family: "Courier New", monospace;
+      color: var(--gold);
+    }
+
+    .product p {
+      margin: 5px 0 0;
+      font-size: 14px;
+      color: oklch(0.955 0.022 92.5 / 55%);
+    }
+
+
+    /* Adjustment 2: Google Reviews section */
+    .reviews-card {
+      border: 1px solid var(--border);
+      border-radius: 28px;
+      background: oklch(0.955 0.022 92.5 / 7%);
+      padding: 40px;
+      display: grid;
+      grid-template-columns: 1.4fr 0.6fr;
+      gap: 32px;
+      align-items: center;
+      backdrop-filter: blur(18px);
+    }
+
+    .reviews-card p {
+      max-width: 58ch;
+      margin: 16px 0 0;
+      line-height: 1.75;
+      color: oklch(0.955 0.022 92.5 / 70%);
+    }
+
+    .review-action {
+      display: flex;
+      justify-content: flex-end;
+      align-items: center;
+    }
+
+    .google-review-button {
+      display: inline-block;
+      border-radius: 999px;
+      padding: 14px 22px;
+      background: var(--gold);
+      color: var(--emerald-ink);
+      font-family: "Courier New", monospace;
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      transition: transform 0.35s var(--ease-out), background 0.2s ease;
+    }
+
+    .google-review-button:hover {
+      transform: translateY(-3px);
+      background: var(--cream);
+    }
+
+    footer {
+      margin-top: 32px;
+      border-top: 1px solid var(--border);
+      background: oklch(0.298 0.055 171.9 / 65%);
+      backdrop-filter: blur(18px);
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 40px;
+      padding: 56px 0;
+    }
+
+    .footer-grid h4 {
+      font-family: "Courier New", monospace;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.22em;
+      color: oklch(0.743 0.117 89.5 / 80%);
+    }
+
+    .footer-grid p,
+    .footer-grid a {
+      font-size: 14px;
+      line-height: 1.7;
+      color: oklch(0.955 0.022 92.5 / 70%);
+    }
+
+    .footer-bottom {
+      border-top: 1px solid oklch(0.955 0.022 92.5 / 10%);
+    }
+
+    .footer-bottom-inner {
+      display: flex;
+      justify-content: space-between;
+      gap: 16px;
+      padding: 20px 0;
+      font-family: "Courier New", monospace;
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.18em;
+      color: oklch(0.955 0.022 92.5 / 40%);
+    }
+
+    .fu { animation: fade-up 0.7s var(--ease-out) both; }
+    .fu-2 { animation: fade-up 0.85s var(--ease-out) 0.12s both; }
+    .fu-3 { animation: fade-up 0.85s var(--ease-out) 0.24s both; }
+    .settle { animation: settle-in 1s var(--ease-out) 0.1s both; }
+
+    @keyframes fade-up {
+      from { opacity: 0; transform: translateY(18px); }
+      to { opacity: 1; transform: none; }
+    }
+
+    @keyframes settle-in {
+      from { opacity: 0; transform: translateY(12px) scale(0.99); }
+      to { opacity: 1; transform: none; }
+    }
+
+    @media (max-width: 900px) {
+      .hero,
+      .story,
+      .reviews-card {
+        grid-template-columns: 1fr;
+      }
+
+      .review-action {
+        justify-content: flex-start;
+      }
+
+      .menu-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .merch-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .nav-inner {
+        flex-wrap: wrap;
+        padding: 10px 0 12px;
+      }
+
+      .nav-links {
+        display: flex;
+        order: 3;
+        width: 100%;
+        gap: 18px;
+        overflow-x: auto;
+        padding: 8px 2px 2px;
+        font-size: 12px;
+        white-space: nowrap;
+        scrollbar-width: thin;
+      }
+
+      .nav-links::-webkit-scrollbar {
+        height: 4px;
+      }
+
+      .nav-links a {
+        flex: 0 0 auto;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .container {
+        width: min(100% - 28px, 1240px);
+      }
+
+      .brand-sub {
+        display: none;
+      }
+
+      .hero {
+        padding: 48px 0;
+        gap: 24px;
+      }
+
+      h1 {
+        font-size: clamp(2.6rem, 13vw, 4.4rem);
+        line-height: 1.04;
+      }
+
+      .hero-copy {
+        font-size: 16px;
+        line-height: 1.65;
+      }
+
+      .menu-card {
+        padding: 28px 20px;
+      }
+
+      .menu-grid,
+      .footer-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .gallery-grid {
+        grid-template-columns: 1fr;
+        grid-auto-rows: 220px;
+      }
+
+      .g-big,
+      .g-wide {
+        grid-column: span 1;
+        grid-row: span 1;
+      }
+
+      .merch-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .footer-bottom-inner {
+        flex-direction: column;
+        align-items: center;
+        text-align: center;
+      }
+    }
+
+    /* Fourth of July seasonal theme */
+    :root {
+      --cream: #fffaf2;
+      --cream-soft: #eef3fb;
+      --cream-deep: #d9e3f2;
+      --ink: #071a3d;
+      --emerald: #1f4e8c;
+      --emerald-deep: #15355f;
+      --emerald-ink: #0b2348;
+      --gold: #e63946;
+      --border: rgba(255,255,255,.14);
+    }
+    .page-bg { background: linear-gradient(145deg,#071a3d 0%,#102d5c 48%,#641c27 100%); }
+    .glow-1 { background: rgba(230,57,70,.30); }
+    .glow-2 { background: rgba(255,255,255,.13); }
+    .glow-3 { background: rgba(42,91,160,.30); }
+    nav { background: rgba(7,26,61,.88); border-bottom-color: rgba(255,255,255,.14); }
+    .eyebrow, .menu-section h3, .stat-number, .price, .live-box strong, .footer-grid h4 { color:#ff5b65; }
+    h1 em { color:#ff5b65; }
+    .pill { color:#fff; border-color:rgba(255,91,101,.75); }
+    .pill:hover, .button-primary, .google-review-button { background:#e63946; color:#fff; }
+    .button-primary:hover, .google-review-button:hover { background:#fff; color:#0b2348; }
+    .button-secondary { border-color:rgba(255,255,255,.45); }
+    .glass-card,.menu-card,.product,.reviews-card { background:rgba(255,255,255,.08); }
+    .live-box { background:rgba(31,78,140,.55); }
+    .gallery-item,.story-image,.product-image { background:rgba(31,78,140,.42); }
+    footer { background:rgba(7,26,61,.78); }
+
+    .gallery-subhead { margin-top:34px; font-family:"Courier New",monospace; font-size:12px; text-transform:uppercase; letter-spacing:.18em; color:#ff7b84; }
+    .history-heading { margin-top:48px; }
+    .bar-gallery { margin-top:16px; display:grid; grid-template-columns:1.35fr 1fr; grid-template-rows:240px 240px; gap:12px; }
+    .bar-gallery .gallery-item { min-height:0; }
+    .bar-main { grid-row:1 / span 2; }
+    .bar-gallery img { width:100%; height:100%; object-fit:cover; display:block; }
+    @media (max-width:900px){ .bar-gallery{grid-template-columns:1fr 1fr;grid-template-rows:300px 260px}.bar-main{grid-column:1 / span 2;grid-row:auto} }
+    @media (max-width:640px){ .bar-gallery{grid-template-columns:1fr;grid-template-rows:repeat(3,280px)}.bar-main{grid-column:auto}.history-heading{margin-top:38px} }
+    body::before {
+      content:"★   ★   ★   ★   ★"; position:fixed; top:82px; right:3vw; z-index:-5;
+      color:rgba(255,255,255,.12); font-size:34px; letter-spacing:12px; transform:rotate(8deg);
+    }
+    body::after {
+      content:""; position:fixed; left:0; right:0; top:70px; height:5px; z-index:30; pointer-events:none;
+      background:linear-gradient(90deg,#e63946 0 33.33%,#fff 33.33% 66.66%,#2a5ba0 66.66%);
+    }
+    .holiday-banner {
+      margin-top:28px; padding:11px 16px; border:1px solid rgba(255,255,255,.18); border-radius:999px;
+      display:inline-block; font-family:"Courier New",monospace; font-size:11px; text-transform:uppercase;
+      letter-spacing:.16em; background:linear-gradient(90deg,rgba(230,57,70,.22),rgba(255,255,255,.08),rgba(42,91,160,.22));
+    }
+  
+    /* Interactive FAQ */
+    .faq-wrap { max-width: 900px; margin: 0 auto; }
+    .faq-intro { max-width: 680px; margin-bottom: 28px; }
+    .faq-list { display: grid; gap: 12px; }
+    .faq-item { border: 1px solid rgba(255,255,255,.16); border-radius: 16px; background: rgba(255,255,255,.08); overflow: hidden; }
+    .faq-question { width: 100%; border: 0; background: transparent; color: var(--cream); padding: 20px 22px; display: flex; align-items: center; justify-content: space-between; gap: 18px; text-align: left; font: inherit; font-weight: 700; cursor: pointer; }
+    .faq-question:hover { background: rgba(255,255,255,.06); }
+    .faq-icon { color: #fff; background: var(--gold); width: 30px; height: 30px; border-radius: 50%; display: grid; place-items: center; flex: 0 0 auto; transition: transform .2s ease; }
+    .faq-answer { max-height: 0; overflow: hidden; transition: max-height .28s ease; }
+    .faq-answer p { margin: 0; padding: 0 22px 20px; color: rgba(255,250,242,.82); line-height: 1.7; }
+    .faq-item.open .faq-answer { max-height: 220px; }
+    .faq-item.open .faq-icon { transform: rotate(45deg); }
+    @media (max-width: 640px) { .faq-question { padding: 17px 16px; } .faq-answer p { padding: 0 16px 18px; } }
+
+  
+    /* Real Casey's history gallery */
+    .gallery-title { max-width: 20ch; }
+    .gallery-intro { max-width: 720px; margin-top: 12px; color: rgba(255,255,255,.72); line-height: 1.7; }
+    .gallery-grid { margin-top: 34px; display:grid; grid-template-columns:repeat(12,1fr); grid-auto-rows:90px; gap:14px; }
+    .gallery-item { position:relative; overflow:hidden; border-radius:18px; cursor:zoom-in; background:rgba(255,255,255,.08); border:1px solid rgba(255,255,255,.12); box-shadow:0 18px 50px rgba(0,0,0,.18); }
+    .gallery-item img { width:100%; height:100%; object-fit:cover; display:block; transition:transform .35s ease, filter .35s ease; }
+    .gallery-item:hover img { transform:scale(1.025); filter:brightness(1.04); }
+    .gallery-item::after { content:attr(data-label); position:absolute; left:14px; right:14px; bottom:12px; padding:9px 11px; border-radius:10px; background:rgba(7,26,61,.78); backdrop-filter:blur(8px); color:white; font:600 11px/1.2 "Courier New",monospace; letter-spacing:.08em; text-transform:uppercase; opacity:0; transform:translateY(6px); transition:.25s ease; }
+    .gallery-item:hover::after { opacity:1; transform:none; }
+    .gallery-a { grid-column:span 7; grid-row:span 5; }
+    .gallery-b { grid-column:span 5; grid-row:span 5; }
+    .gallery-c { grid-column:span 5; grid-row:span 5; }
+    .gallery-d { grid-column:span 7; grid-row:span 5; }
+    .gallery-e { grid-column:span 6; grid-row:span 5; }
+    .gallery-f { grid-column:span 6; grid-row:span 5; }
+    .gallery-lightbox { position:fixed; inset:0; z-index:9999; display:none; align-items:center; justify-content:center; padding:28px; background:rgba(2,8,20,.92); }
+    .gallery-lightbox.open { display:flex; }
+    .gallery-lightbox img { max-width:min(1100px,94vw); max-height:88vh; object-fit:contain; border-radius:12px; box-shadow:0 30px 90px rgba(0,0,0,.55); }
+    .gallery-close { position:absolute; top:18px; right:22px; width:44px; height:44px; border:1px solid rgba(255,255,255,.3); border-radius:50%; background:rgba(255,255,255,.1); color:#fff; font-size:26px; cursor:pointer; }
+    .story-image.history-feature { min-height:430px; }
+    .story-image.history-feature img { width:100%; height:100%; object-fit:cover; }
+    .merch-coming { margin-top:28px; padding:34px; border:1px solid rgba(255,255,255,.14); border-radius:18px; background:rgba(255,255,255,.06); max-width:760px; }
+    .merch-coming strong { display:block; margin-bottom:8px; color:#fff; font-size:18px; }
+    @media (max-width:900px){ .gallery-grid{grid-template-columns:repeat(2,1fr);grid-auto-rows:260px}.gallery-a,.gallery-b,.gallery-c,.gallery-d,.gallery-e,.gallery-f{grid-column:span 1;grid-row:span 1}.gallery-item::after{opacity:1;transform:none}.story-image.history-feature{min-height:360px} }
+    @media (max-width:640px){ .gallery-grid{grid-template-columns:1fr;grid-auto-rows:330px}.gallery-a,.gallery-b,.gallery-c,.gallery-d,.gallery-e,.gallery-f{grid-column:1;grid-row:auto}.gallery-lightbox{padding:16px}.story-image.history-feature{min-height:330px} }
+
+  </style>
+
+  <style>
+    .image-fallback {
+      width:100%; height:100%; min-height:160px; display:flex; flex-direction:column;
+      align-items:center; justify-content:center; text-align:center; padding:20px;
+      background:linear-gradient(145deg,#071a3d 0%,#173c73 52%,#8f2635 100%);
+      color:#fff; font-family:"Courier New",monospace; text-transform:uppercase; letter-spacing:.16em;
+    }
+    .image-fallback span { font-weight:700; font-size:16px; }
+    .image-fallback small { margin-top:8px; opacity:.75; font-size:10px; }
+  
+    /* Real Casey's history gallery */
+    .gallery-title { max-width: 20ch; }
+    .gallery-intro { max-width: 720px; margin-top: 12px; color: rgba(255,255,255,.72); line-height: 1.7; }
+    .gallery-grid { margin-top: 34px; display:grid; grid-template-columns:repeat(12,1fr); grid-auto-rows:90px; gap:14px; }
+    .gallery-item { position:relative; overflow:hidden; border-radius:18px; cursor:zoom-in; background:rgba(255,255,255,.08); border:1px solid rgba(255,255,255,.12); box-shadow:0 18px 50px rgba(0,0,0,.18); }
+    .gallery-item img { width:100%; height:100%; object-fit:cover; display:block; transition:transform .35s ease, filter .35s ease; }
+    .gallery-item:hover img { transform:scale(1.025); filter:brightness(1.04); }
+    .gallery-item::after { content:attr(data-label); position:absolute; left:14px; right:14px; bottom:12px; padding:9px 11px; border-radius:10px; background:rgba(7,26,61,.78); backdrop-filter:blur(8px); color:white; font:600 11px/1.2 "Courier New",monospace; letter-spacing:.08em; text-transform:uppercase; opacity:0; transform:translateY(6px); transition:.25s ease; }
+    .gallery-item:hover::after { opacity:1; transform:none; }
+    .gallery-a { grid-column:span 7; grid-row:span 5; }
+    .gallery-b { grid-column:span 5; grid-row:span 5; }
+    .gallery-c { grid-column:span 5; grid-row:span 5; }
+    .gallery-d { grid-column:span 7; grid-row:span 5; }
+    .gallery-e { grid-column:span 6; grid-row:span 5; }
+    .gallery-f { grid-column:span 6; grid-row:span 5; }
+    .gallery-lightbox { position:fixed; inset:0; z-index:9999; display:none; align-items:center; justify-content:center; padding:28px; background:rgba(2,8,20,.92); }
+    .gallery-lightbox.open { display:flex; }
+    .gallery-lightbox img { max-width:min(1100px,94vw); max-height:88vh; object-fit:contain; border-radius:12px; box-shadow:0 30px 90px rgba(0,0,0,.55); }
+    .gallery-close { position:absolute; top:18px; right:22px; width:44px; height:44px; border:1px solid rgba(255,255,255,.3); border-radius:50%; background:rgba(255,255,255,.1); color:#fff; font-size:26px; cursor:pointer; }
+    .story-image.history-feature { min-height:430px; }
+    .story-image.history-feature img { width:100%; height:100%; object-fit:cover; }
+    .merch-coming { margin-top:28px; padding:34px; border:1px solid rgba(255,255,255,.14); border-radius:18px; background:rgba(255,255,255,.06); max-width:760px; }
+    .merch-coming strong { display:block; margin-bottom:8px; color:#fff; font-size:18px; }
+    @media (max-width:900px){ .gallery-grid{grid-template-columns:repeat(2,1fr);grid-auto-rows:260px}.gallery-a,.gallery-b,.gallery-c,.gallery-d,.gallery-e,.gallery-f{grid-column:span 1;grid-row:span 1}.gallery-item::after{opacity:1;transform:none}.story-image.history-feature{min-height:360px} }
+    @media (max-width:640px){ .gallery-grid{grid-template-columns:1fr;grid-auto-rows:330px}.gallery-a,.gallery-b,.gallery-c,.gallery-d,.gallery-e,.gallery-f{grid-column:1;grid-row:auto}.gallery-lightbox{padding:16px}.story-image.history-feature{min-height:330px} }
+
+  </style>
+
+</head>
+
+<body>
+  <div class="page-bg"></div>
+  <div class="ambient-glow glow-1"></div>
+  <div class="ambient-glow glow-2"></div>
+  <div class="ambient-glow glow-3"></div>
+
+  <nav>
+    <div class="container nav-inner">
+      <div class="brand">
+        <span class="brand-name">Casey's</span>
+        <span class="brand-sub">Est. 1994 · Somerville</span>
+      </div>
+
+      <div class="nav-links">
+        <a href="#menu">Menu</a>
+        <a href="#gallery">Gallery</a>
+        <a href="#faq">FAQ</a>
+        <a href="#story">Our Story</a>
+        <a href="events-story.html">Events &amp; Stories</a>
+        <a href="#merch">Shop</a>
+      </div>
+
+      <a class="pill" href="#hours">Hours</a>
+    </div>
+  </nav>
+
+  <main class="container">
+    <section class="hero">
+      <div>
+        <p class="eyebrow fu">Somerville, Massachusetts · Since 1994</p>
+        <div class="holiday-banner fu">★ Fourth of July Weekend at Casey's ★</div>
+        <h1 class="fu-2">The pub that<br>settled into<br><em>the neighborhood.</em></h1>
+
+        <p class="hero-copy fu-3">
+          Thirty-two years of poured pints, slow conversations, and a bar
+          that never hurried you out. Proper stout, honest food, and a room
+          that feels like it's always been yours.
+        </p>
+
+        <div class="button-row fu-3">
+          <a class="button button-primary" href="#menu">See the menu</a>
+          <a class="button button-secondary" href="#story">Read our story</a>
+        </div>
+      </div>
+
+      <div>
+        <div class="glass-card settle">
+          <div class="hours-head">
+            <span class="small-label">Opening hours</span>
+            <span class="open-now">● Open now</span>
+          </div>
+
+          <dl class="hours-list">
+            <div class="hour-row"><dt>Monday</dt><dd>10am – 1am</dd></div>
+            <div class="hour-row"><dt>Tuesday</dt><dd>10am – 1am</dd></div>
+            <div class="hour-row"><dt>Wednesday</dt><dd>10am – 1am</dd></div>
+            <div class="hour-row"><dt>Thursday</dt><dd>10am – 1am</dd></div>
+            <div class="hour-row"><dt>Friday</dt><dd>10am – 2am</dd></div>
+            <div class="hour-row"><dt>Saturday</dt><dd>10am – 2am</dd></div>
+            <div class="hour-row"><dt>Sunday</dt><dd>12pm – 1am</dd></div>
+          </dl>
+
+          <div class="live-box">
+            <strong>Live</strong>
+            <span>Every game on, open to 2am Friday &amp; Saturday.</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="menu" class="section-pad">
+      <div class="menu-card">
+        <div class="menu-head">
+          <div>
+            <p class="eyebrow">(a) The menu</p>
+            <h2>From the tap to the table</h2>
+          </div>
+          <span class="small-label">Kitchen open daily</span>
+        </div>
+
+        <div class="menu-grid">
+          <div class="menu-section">
+            <h3>Appetizers</h3>
+            <ul>
+              <li><span class="item-name">Wings Plain</span><span class="menu-price">$12</span></li>
+              <li><span class="item-name">Buffalo Wings</span><span class="menu-price">$13</span></li>
+              <li><span class="item-name">BBQ Wings</span><span class="menu-price">$13</span></li>
+              <li><span class="item-name">Honey Garlic Wings</span><span class="menu-price">$13</span></li>
+              <li><span class="item-name">Chicken Parmesan Fingers</span><span class="menu-price">$14</span></li>
+              <li><span class="item-name">Chicken Fingers</span><span class="menu-price">$12</span></li>
+              <li><span class="item-name">Buffalo Fingers</span><span class="menu-price">$13</span></li>
+              <li><span class="item-name">BBQ Fingers</span><span class="menu-price">$13</span></li>
+              <li><span class="item-name">Honey Garlic Fingers</span><span class="menu-price">$13</span></li>
+              <li><span class="item-name">Chicken Bites</span><span class="menu-price">$12</span></li>
+              <li><span class="item-name">Buffalo Chicken Bites</span><span class="menu-price">$13</span></li>
+              <li><span class="item-name">Sausage Bites</span><span class="menu-price">$12</span></li>
+              <li><span class="item-name">Steak Bites</span><span class="menu-price">$16</span></li>
+              <li><span class="item-name">Mozzarella Sticks</span><span class="menu-price">$12</span></li>
+              <li><span class="item-name">Toasted Raviolis Cheese (7)</span><span class="menu-price">$12</span></li>
+              <li><span class="item-name">Pretzel</span><span class="menu-price">$5</span></li>
+              <li><span class="item-name">Egg Rolls</span><span class="menu-price">$10</span></li>
+              <li><span class="item-name">Nachos Grande</span><span class="menu-price">$14</span></li>
+              <li><span class="item-name">Nachos Veggie</span><span class="menu-price">$12</span></li>
+              <li><span class="item-name">Chili</span><span class="menu-price">$8</span></li>
+              <li><span class="item-name">Potato Skins</span><span class="menu-price">$12</span></li>
+              <li><span class="item-name">French Fries</span><span class="menu-price">$8</span></li>
+              <li><span class="item-name">Onion Rings</span><span class="menu-price">$9</span></li>
+            </ul>
+            <p class="menu-note">Add $1 for wings on the grill · Add French fries to fingers for $3.</p>
+          </div>
+
+          <div class="menu-section">
+            <h3>Salads</h3>
+            <ul>
+              <li><span class="item-name">Dinner Salad</span><span class="menu-price">$7</span></li>
+              <li><span class="item-name">Large Salad</span><span class="menu-price">$9</span></li>
+              <li><span class="item-name">Greek Salad</span><span class="menu-price">$11</span></li>
+              <li><span class="item-name">Add Grilled Chicken</span><span class="menu-price">$10</span></li>
+              <li><span class="item-name">Add Chicken Fingers</span><span class="menu-price">$9</span></li>
+              <li><span class="item-name">Add Buffalo Chicken</span><span class="menu-price">$11</span></li>
+              <li><span class="item-name">Add Tips</span><span class="menu-price">$18</span></li>
+            </ul>
+            <div class="menu-special"><strong>Lunch Special · $10</strong><p class="menu-note">Before 3:00pm · No take out<br>Monday — Steak/Cheese<br>Tuesday — Sausage<br>Wednesday — Chicken Parmesan<br>Thursday — Cheese Burger<br>Friday — Hot Pastrami<br>Served with French Fries</p></div>
+          </div>
+
+          <div class="menu-section">
+            <h3>Sandwiches</h3>
+            <p class="menu-note">All sandwiches come with French fries.</p>
+            <ul>
+              <li><span class="item-name">Tips</span><span class="menu-price">$17</span></li>
+              <li><span class="item-name">Burger</span><span class="menu-price">$11</span></li>
+              <li><span class="item-name">Sausage</span><span class="menu-price">$12</span></li>
+              <li><span class="item-name">Marinated Chicken</span><span class="menu-price">$14</span></li>
+              <li><span class="item-name">Steak/Cheese</span><span class="menu-price">$14</span></li>
+              <li><span class="item-name">Chicken Salad</span><span class="menu-price">$10</span></li>
+              <li><span class="item-name">Hot Pastrami</span><span class="menu-price">$12</span></li>
+              <li><span class="item-name">Chicken Parmesan</span><span class="menu-price">$14</span></li>
+              <li><span class="item-name">Chicken Cutlet</span><span class="menu-price">$13</span></li>
+              <li><span class="item-name">Hot Dog</span><span class="menu-price">$4</span></li>
+              <li><span class="item-name">Hot Dog w/French Fries</span><span class="menu-price">$6</span></li>
+              <li><span class="item-name">Chili Dog</span><span class="menu-price">$6</span></li>
+            </ul>
+            <p class="menu-note">Add onion rings $2 · Add bacon $2 · Add salad $1 · Add cheese $1.</p>
+          </div>
+
+          <div class="menu-section">
+            <h3>Pizza</h3>
+            <ul>
+              <li><span class="item-name">Cheese</span><span class="menu-price">$16</span></li>
+              <li><span class="item-name">Slices (2)</span><span class="menu-price">$5</span></li>
+            </ul>
+            <p class="menu-note">Toppings</p>
+            <ul>
+              <li><span class="item-name">Buffalo Chicken</span><span class="menu-price">$8</span></li>
+              <li><span class="item-name">Bacon</span><span class="menu-price">$3.50</span></li>
+              <li><span class="item-name">Hamburger</span><span class="menu-price">$3.50</span></li>
+              <li><span class="item-name">Sausage</span><span class="menu-price">$3.50</span></li>
+              <li><span class="item-name">Pepperoni</span><span class="menu-price">$3.50</span></li>
+              <li><span class="item-name">Onion</span><span class="menu-price">$2</span></li>
+              <li><span class="item-name">Pepper</span><span class="menu-price">$2</span></li>
+              <li><span class="item-name">Black Olives</span><span class="menu-price">$2</span></li>
+              <li><span class="item-name">Mushroom</span><span class="menu-price">$2</span></li>
+              <li><span class="item-name">Garlic</span><span class="menu-price">$2</span></li>
+            </ul>
+          </div>
+
+          <div class="menu-section">
+            <h3>From the Pit</h3>
+            <p class="menu-note">All dinners with choice of rice, French fries, onion rings or salad.</p>
+            <ul>
+              <li><span class="item-name">Steak Tips (14oz)</span><span class="menu-price">$27</span></li>
+              <li><span class="item-name">Steak Tips (10oz)</span><span class="menu-price">$23</span></li>
+              <li><span class="item-name">Chicken Tips</span><span class="menu-price">$17</span></li>
+              <li><span class="item-name">Sausage</span><span class="menu-price">$15</span></li>
+              <li><span class="item-name">Combo</span><span class="menu-price">$25</span></li>
+            </ul>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="gallery" class="section-pad">
+      <p class="eyebrow">(b) Inside Casey's &amp; through the years</p>
+      <h2 class="gallery-title">The pub today. The history behind it.</h2>
+      <p class="gallery-intro">Step inside Casey's, then take a look back at the awards, newspaper pieces, and neighborhood history displayed throughout the pub. Click any photo to view it larger.</p>
+
+      <div class="gallery-subhead">Inside Casey's</div>
+      <div class="bar-gallery">
+        <div class="gallery-item bar-photo bar-main" data-label="Inside Casey's · The bar"><img src="bar-tvs.png" alt="The bar inside Casey's with taps, seating, and televisions."></div>
+        <div class="gallery-item bar-photo" data-label="Inside Casey's · Dining area"><img src="interior-tables.png" alt="Tables and seating inside Casey's pub."></div>
+        <div class="gallery-item bar-photo" data-label="Inside Casey's · Pub details"><img src="caseys-crest-wall.png" alt="Casey's crest and memorabilia displayed inside the pub."></div>
+      </div>
+
+      <div class="gallery-subhead history-heading">Casey's history wall</div>
+      <div class="gallery-grid">
+        <div class="gallery-item gallery-a" data-label="Somerville News Weekly · Best of the Best 2016"><img src="history-best-2016.png" alt="Casey's Best of the Best of Somerville award from 2016."></div>
+        <div class="gallery-item gallery-b" data-label="Somerville Firefighters · Appreciation Award"><img src="history-firefighters.png" alt="Appreciation Award presented to Casey's Bar by Somerville Firefighters Local 76."></div>
+        <div class="gallery-item gallery-c" data-label="Casey's exterior · wall collapse archive"><img src="history-collapse-collage.png" alt="Historic collage showing Casey's exterior and damage after the wall collapse."></div>
+        <div class="gallery-item gallery-d" data-label="City Side · Wall collapses, closing Casey's"><img src="history-newspaper.png" alt="Framed newspaper story covering the wall collapse at Casey's."></div>
+        <div class="gallery-item gallery-e" data-label="X-Men of Boston · Certificate of Appreciation"><img src="history-xmen.png" alt="Certificate of Appreciation presented to the owners of Casey's by X-Men of Boston."></div>
+        <div class="gallery-item gallery-f" data-label="Massachusetts General Court · Resolution"><img src="history-resolution.png" alt="Framed Massachusetts General Court resolution displayed at Casey's."></div>
+      </div>
+    </section>
+
+    <section id="story" class="story">
+      <div class="story-image history-feature">
+        <img src="caseys-exterior.png" alt="Casey's pub exterior in Somerville, Massachusetts.">
+      </div>
+
+      <div>
+        <p class="eyebrow">(c) Our story</p>
+        <h2>Rooted here since '94</h2>
+
+        <p class="story-copy">
+          Casey's opened on July 3rd, 1994 — a summer night that turned
+          into a 32-year neighborhood tradition. We've watched the brick
+          stores come and go and never once changed our window. The
+          emerald walls were repainted once. The brass was never.
+        </p>
+
+        <p class="story-copy">
+          We're not a destination. We're the place you stop on the way
+          home and end up staying through the third period.
+        </p>
+
+        <div class="stats">
+          <div>
+            <div class="stat-number">32</div>
+            <div class="stat-label">Years on the block</div>
+          </div>
+          <div>
+            <div class="stat-number">14</div>
+            <div class="stat-label">Taps rotating</div>
+          </div>
+          <div>
+            <div class="stat-number">173</div>
+            <div class="stat-label">Broadway address</div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="merch" class="section-pad">
+      <p class="eyebrow">(d) Take some home</p>
+      <h2>Casey's Merch — Available In Store</h2>
+      <p style="max-width: 650px; color: rgba(255,255,255,.72);">Casey's merchandise is available for in-person purchase only. Check what's in stock below, then stop by the pub to pick it up.</p>
+
+      <div class="merch-grid merch-no-photos">
+        <article class="product">
+          <div class="product-head"><h3>Casey's Pint</h3><span class="price">In stock</span></div>
+          <p>Hand-thrown, emerald band<br><strong>Available in person — come in to purchase.</strong></p>
+        </article>
+        <article class="product">
+          <div class="product-head"><h3>Somerville Beanie</h3><span class="price">In stock</span></div>
+          <p>Cream wool, gold crest<br><strong>Available in person — come in to purchase.</strong></p>
+        </article>
+        <article class="product">
+          <div class="product-head"><h3>Enamelware Mug</h3><span class="price">In stock</span></div>
+          <p>Gold rim, emerald glaze<br><strong>Available in person — come in to purchase.</strong></p>
+        </article>
+        <article class="product">
+          <div class="product-head"><h3>Stout Decanter</h3><span class="price">Low stock</span></div>
+          <p>Pour it slow, 750ml<br><strong>Available in person — come in to purchase.</strong></p>
+        </article>
+      </div>
+    </section>
+
+    <!-- Adjustment 2: New Reviews section -->
+    <section id="reviews" class="section-pad">
+      <div class="reviews-card">
+        <div>
+          <p class="eyebrow">(e) Reviews</p>
+          <h2>Had a good night at Casey's?</h2>
+          <p>
+            Tell other people about your visit. Read what guests are saying
+            or leave Casey's a review on Google.
+          </p>
+        </div>
+        <div class="review-action">
+          <a
+            class="google-review-button"
+            href="https://www.google.com/search?q=Casey%27s+Somerville+MA+reviews"
+            target="_blank"
+            rel="noopener noreferrer"
+          >
+            Open Google Reviews
+          </a>
+        </div>
+      </div>
+    </section>
+
+    <!-- Interactive Feature: Click-to-open FAQ -->
+    <section id="faq" class="section-pad">
+      <div class="faq-wrap">
+        <p class="eyebrow">(f) FAQ</p>
+        <h2>Before you pull up a stool</h2>
+        <p class="faq-intro">Tap a question to get the answer. Everything you need for a night at Casey's, without hunting around the site.</p>
+        <div class="faq-list">
+          <div class="faq-item">
+            <button class="faq-question" type="button" aria-expanded="false"><span>Where is Casey's located?</span><span class="faq-icon" aria-hidden="true">+</span></button>
+            <div class="faq-answer"><p>We're at 173 Broadway in Somerville, Massachusetts 02145.</p></div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-question" type="button" aria-expanded="false"><span>What are your hours?</span><span class="faq-icon" aria-hidden="true">+</span></button>
+            <div class="faq-answer"><p>Monday–Thursday: 10am–1am. Friday &amp; Saturday: 10am–2am. Sunday: 12pm–1am.</p></div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-question" type="button" aria-expanded="false"><span>Can I watch sports at Casey's?</span><span class="faq-icon" aria-hidden="true">+</span></button>
+            <div class="faq-answer"><p>Yes. Casey's has TVs around the bar, making it an easy spot to catch a game with a pint and some food.</p></div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-question" type="button" aria-expanded="false"><span>Where can I see upcoming events?</span><span class="faq-icon" aria-hidden="true">+</span></button>
+            <div class="faq-answer"><p>Check the Events &amp; Stories page for the latest Casey's happenings and community stories.</p></div>
+          </div>
+          <div class="faq-item">
+            <button class="faq-question" type="button" aria-expanded="false"><span>Does Casey's have merchandise?</span><span class="faq-icon" aria-hidden="true">+</span></button>
+            <div class="faq-answer"><p>Yes. Casey’s merchandise is available exclusively for in-person purchase at the pub. Stop by to see the current selection.</p></div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer id="hours">
+    <div class="container footer-grid">
+      <div>
+        <span class="brand-name">Casey's</span>
+        <p>A proper Irish pub in the heart of Somerville. Pull up a stool.</p>
+      </div>
+
+      <div>
+        <h4>Find us</h4>
+        <p>173 Broadway<br>Somerville, MA 02145</p>
+        <a href="tel:+16175550192">(617) 555-0192</a>
+      </div>
+
+      <div>
+        <h4>Hours</h4>
+        <p class="mono">Mon–Thu 10am – 1am<br>Fri &amp; Sat 10am – 2am<br>Sun 12pm – 1am</p>
+      </div>
+    </div>
+
+    <div class="footer-bottom">
+      <div class="container footer-bottom-inner">
+        <span>© 1994–2026 Casey's Pub</span>
+        <span><a href="events-story.html">Events &amp; Customer Stories</a> · Drink responsibly</span>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    document.querySelectorAll('.faq-question').forEach(function (button) {
+      button.addEventListener('click', function () {
+        const item = button.closest('.faq-item');
+        const isOpen = item.classList.toggle('open');
+        button.setAttribute('aria-expanded', String(isOpen));
+      });
+    });
+
+    document.querySelectorAll('img').forEach(function (img) {
+      img.addEventListener('error', function () {
+        const fallback = document.createElement('div');
+        fallback.className = 'image-fallback';
+        fallback.setAttribute('role', 'img');
+        fallback.setAttribute('aria-label', img.alt || "Casey's photo");
+        fallback.innerHTML = "<span>★ CASEY'S ★</span><small>Fourth of July</small>";
+        img.replaceWith(fallback);
+      }, { once: true });
+    });
+  </script>
+
+
+  <div class="gallery-lightbox" id="galleryLightbox" aria-hidden="true">
+    <button class="gallery-close" type="button" aria-label="Close image">×</button>
+    <img src="" alt="Expanded Casey's gallery photo">
+  </div>
+  <script>
+    (() => {
+      const box = document.getElementById('galleryLightbox');
+      const big = box.querySelector('img');
+      const close = box.querySelector('.gallery-close');
+      document.querySelectorAll('.gallery-item img').forEach(img => img.addEventListener('click', () => {
+        big.src = img.src; big.alt = img.alt; box.classList.add('open'); box.setAttribute('aria-hidden','false');
+      }));
+      const shut = () => { box.classList.remove('open'); box.setAttribute('aria-hidden','true'); big.src=''; };
+      close.addEventListener('click', shut);
+      box.addEventListener('click', e => { if(e.target === box) shut(); });
+      document.addEventListener('keydown', e => { if(e.key === 'Escape') shut(); });
+    })();
+  </script>
+
+</body>
+</html>
