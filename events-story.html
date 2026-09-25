@@ -1,0 +1,497 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Events & Stories | Casey's Pub</title>
+  <meta name="description" content="See upcoming events at Casey's Pub and share your favorite Casey's story.">
+
+  <style>
+    :root {
+      --cream: oklch(0.955 0.022 92.5);
+      --ink: oklch(0.220 0.030 172.5);
+      --emerald: oklch(0.517 0.099 169.8);
+      --emerald-deep: oklch(0.378 0.073 168.9);
+      --emerald-ink: oklch(0.298 0.055 171.9);
+      --gold: oklch(0.743 0.117 89.5);
+      --border: oklch(0.955 0.022 92.5 / 12%);
+      --ease-out: cubic-bezier(0.32, 0.72, 0, 1);
+    }
+
+    * { box-sizing: border-box; }
+
+    html { scroll-behavior: smooth; }
+
+    body {
+      margin: 0;
+      background: var(--emerald-ink);
+      color: var(--cream);
+      font-family: "Trebuchet MS", Arial, sans-serif;
+    }
+
+    a { color: inherit; text-decoration: none; }
+
+    .container {
+      width: min(1120px, calc(100% - 48px));
+      margin: 0 auto;
+    }
+
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 20;
+      border-bottom: 1px solid var(--border);
+      background: oklch(0.298 0.055 171.9 / 88%);
+      backdrop-filter: blur(16px);
+    }
+
+    .nav-inner {
+      min-height: 72px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 24px;
+    }
+
+    .brand {
+      font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;
+      font-size: 22px;
+      font-weight: 700;
+    }
+
+    .nav-links {
+      display: flex;
+      gap: 24px;
+      font-size: 14px;
+      color: oklch(0.955 0.022 92.5 / 72%);
+    }
+
+    .nav-links a:hover { color: var(--gold); }
+
+    .hero {
+      padding: 88px 0 64px;
+      max-width: 850px;
+    }
+
+    .eyebrow {
+      font-family: "Courier New", monospace;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.28em;
+      color: var(--gold);
+    }
+
+    h1, h2, h3 {
+      font-family: "Palatino Linotype", "Book Antiqua", Palatino, serif;
+    }
+
+    h1 {
+      margin: 14px 0 0;
+      font-size: clamp(3rem, 7vw, 6rem);
+      line-height: 1;
+      letter-spacing: -0.04em;
+    }
+
+    .hero p:last-child {
+      margin-top: 24px;
+      max-width: 60ch;
+      font-size: 18px;
+      line-height: 1.75;
+      color: oklch(0.955 0.022 92.5 / 70%);
+    }
+
+    section {
+      padding: 44px 0 72px;
+    }
+
+    .section-title {
+      margin: 12px 0 0;
+      font-size: clamp(2rem, 4vw, 2.7rem);
+    }
+
+    .events-grid {
+      margin-top: 28px;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 18px;
+    }
+
+    .event-card,
+    .story-panel,
+    .saved-story {
+      border: 1px solid var(--border);
+      border-radius: 22px;
+      background: oklch(0.955 0.022 92.5 / 7%);
+      backdrop-filter: blur(14px);
+    }
+
+    .event-card {
+      padding: 24px;
+      transition: transform 0.35s var(--ease-out);
+    }
+
+    .event-card:hover { transform: translateY(-4px); }
+
+    .event-date {
+      font-family: "Courier New", monospace;
+      color: var(--gold);
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.15em;
+    }
+
+    .event-card h3 {
+      margin: 14px 0 10px;
+      font-size: 22px;
+    }
+
+    .event-card p {
+      margin: 0;
+      line-height: 1.6;
+      color: oklch(0.955 0.022 92.5 / 68%);
+    }
+
+    .story-layout {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 24px;
+      margin-top: 28px;
+      align-items: start;
+    }
+
+    .story-panel {
+      padding: 28px;
+    }
+
+    label {
+      display: block;
+      margin: 18px 0 8px;
+      font-family: "Courier New", monospace;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      color: var(--gold);
+    }
+
+    input, textarea {
+      width: 100%;
+      border: 1px solid oklch(0.955 0.022 92.5 / 20%);
+      border-radius: 12px;
+      padding: 13px 14px;
+      background: oklch(0.220 0.030 172.5 / 55%);
+      color: var(--cream);
+      font: inherit;
+    }
+
+    textarea {
+      min-height: 160px;
+      resize: vertical;
+    }
+
+    button {
+      margin-top: 18px;
+      border: 0;
+      border-radius: 999px;
+      padding: 13px 22px;
+      background: var(--gold);
+      color: var(--emerald-ink);
+      font-family: "Courier New", monospace;
+      font-size: 12px;
+      text-transform: uppercase;
+      letter-spacing: 0.14em;
+      cursor: pointer;
+    }
+
+    button:hover { background: var(--cream); }
+
+    .note {
+      margin-top: 12px;
+      font-size: 12px;
+      line-height: 1.5;
+      color: oklch(0.955 0.022 92.5 / 48%);
+    }
+
+    .saved-stories {
+      display: grid;
+      gap: 14px;
+    }
+
+    .saved-story {
+      padding: 20px;
+    }
+
+    .saved-story h3 {
+      margin: 0 0 8px;
+      font-size: 18px;
+      color: var(--gold);
+    }
+
+    .saved-story p {
+      margin: 0;
+      line-height: 1.65;
+      color: oklch(0.955 0.022 92.5 / 72%);
+    }
+
+    .empty {
+      color: oklch(0.955 0.022 92.5 / 52%);
+      line-height: 1.6;
+    }
+
+    footer {
+      border-top: 1px solid var(--border);
+      padding: 26px 0;
+      font-family: "Courier New", monospace;
+      font-size: 10px;
+      text-transform: uppercase;
+      letter-spacing: 0.16em;
+      color: oklch(0.955 0.022 92.5 / 45%);
+    }
+
+    @media (max-width: 850px) {
+      .events-grid,
+      .story-layout {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .container { width: min(100% - 28px, 1120px); }
+      .nav-links { gap: 12px; font-size: 12px; }
+      .hero { padding-top: 64px; }
+    }
+
+    /* Fourth of July seasonal theme */
+    :root {
+      --cream: #fffaf2;
+      --ink: #071a3d;
+      --emerald: #1f4e8c;
+      --emerald-deep: #15355f;
+      --emerald-ink: #0b2348;
+      --gold: #e63946;
+      --border: rgba(255,255,255,.14);
+    }
+
+    body {
+      background: linear-gradient(145deg,#071a3d 0%,#102d5c 48%,#641c27 100%);
+      background-attachment: fixed;
+      overflow-x: hidden;
+    }
+
+    body::before {
+      content: "★   ★   ★   ★   ★";
+      position: fixed;
+      top: 90px;
+      right: 3vw;
+      z-index: -1;
+      color: rgba(255,255,255,.11);
+      font-size: 34px;
+      letter-spacing: 12px;
+      transform: rotate(8deg);
+      pointer-events: none;
+    }
+
+    body::after {
+      content: "";
+      position: fixed;
+      left: 0; right: 0; top: 72px; height: 5px;
+      z-index: 30;
+      background: linear-gradient(90deg,#e63946 0 33.33%,#fff 33.33% 66.66%,#2a5ba0 66.66%);
+      pointer-events: none;
+    }
+
+    nav {
+      background: rgba(7,26,61,.90);
+      border-bottom-color: rgba(255,255,255,.14);
+    }
+
+    .nav-links a:hover, .eyebrow, .event-date, label, .saved-story h3 { color: #ff5b65; }
+
+    .event-card, .story-panel, .saved-story {
+      background: rgba(255,255,255,.08);
+      border-color: rgba(255,255,255,.14);
+      box-shadow: 0 14px 35px rgba(0,0,0,.12);
+    }
+
+    input, textarea {
+      background: rgba(7,26,61,.58);
+      border-color: rgba(255,255,255,.22);
+    }
+
+    button { background: #e63946; color: #fff; }
+    button:hover { background: #fff; color: #0b2348; }
+
+    .holiday-banner {
+      margin-top: 24px;
+      padding: 11px 16px;
+      display: inline-block;
+      border: 1px solid rgba(255,255,255,.18);
+      border-radius: 999px;
+      background: linear-gradient(90deg,rgba(230,57,70,.22),rgba(255,255,255,.08),rgba(42,91,160,.22));
+      font-family: "Courier New", monospace;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: .16em;
+    }
+
+    .event-card:nth-child(1) { border-top: 3px solid #e63946; }
+    .event-card:nth-child(2) { border-top: 3px solid #fff; }
+    .event-card:nth-child(3) { border-top: 3px solid #2a5ba0; }
+
+    @media (max-width: 640px) {
+      .nav-inner { flex-wrap: wrap; padding: 12px 0; }
+      .nav-links {
+        width: 100%;
+        display: flex;
+        overflow-x: auto;
+        white-space: nowrap;
+        padding: 6px 0 2px;
+      }
+      h1 { font-size: clamp(2.6rem, 14vw, 4.3rem); }
+      .hero { padding-top: 56px; }
+    }
+
+  </style>
+</head>
+
+<body>
+  <nav>
+    <div class="container nav-inner">
+      <a class="brand" href="index.html">Casey's</a>
+      <div class="nav-links">
+        <a href="index.html">Home</a>
+        <a href="#events">Events</a>
+        <a href="#stories">Stories</a>
+      </div>
+    </div>
+  </nav>
+
+  <main class="container">
+    <header class="hero">
+      <p class="eyebrow">Casey's Community</p>
+      <div class="holiday-banner">★ Fourth of July Weekend at Casey's ★</div>
+      <h1>Events &amp; Stories</h1>
+      <p>
+        Celebrate the Fourth at Casey's with neighborhood events, game-day energy, and a place to share your favorite pub memories.
+      </p>
+    </header>
+
+    <section id="events">
+      <p class="eyebrow">(a) What's on</p>
+      <h2 class="section-title">Fourth of July weekend lineup</h2>
+
+      <div class="events-grid">
+        <article class="event-card">
+          <div class="event-date">Thursday · July 2 · 8:00 PM</div>
+          <h3>Stars & Stripes Trivia Night</h3>
+          <p>Red, white, and blue trivia, cold pints, and five rounds of neighborhood competition. Walk-ins welcome.</p>
+        </article>
+
+        <article class="event-card">
+          <div class="event-date">Friday · July 3 · 7:30 PM</div>
+          <h3>Independence Eve at Casey's</h3>
+          <p>Kick off the holiday weekend with the featured game on with sound, food specials, and late-night hours.</p>
+        </article>
+
+        <article class="event-card">
+          <div class="event-date">Saturday · July 4 · 4:00 PM</div>
+          <h3>Fourth of July Sports Social</h3>
+          <p>Celebrate the Fourth with afternoon games, rotating specials, plenty of screens, and a neighborhood party atmosphere.</p>
+        </article>
+      </div>
+    </section>
+
+    <section id="stories">
+      <p class="eyebrow">(b) Your Casey's story</p>
+      <h2 class="section-title">Leave your favorite memory</h2>
+
+      <div class="story-layout">
+        <div class="story-panel">
+          <form id="storyForm">
+            <label for="name">Your name</label>
+            <input id="name" name="name" type="text" maxlength="40" placeholder="Max" required>
+
+            <label for="story">Your story</label>
+            <textarea id="story" name="story" maxlength="700" placeholder="Tell us about your favorite time at Casey's..." required></textarea>
+
+            <button type="submit">Add My Story</button>
+            <p class="note">
+              Class-project demo: stories are saved only in this browser using local storage.
+            </p>
+          </form>
+        </div>
+
+        <div>
+          <div id="savedStories" class="saved-stories">
+            <p class="empty" id="emptyMessage">
+              No customer stories have been added on this browser yet. Be the first.
+            </p>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer>
+    <div class="container">
+      Casey's Pub · 173 Broadway · Somerville, MA · <a href="index.html">Back to homepage</a>
+    </div>
+  </footer>
+
+  <script>
+    const form = document.getElementById("storyForm");
+    const storiesBox = document.getElementById("savedStories");
+
+    function getStories() {
+      return JSON.parse(localStorage.getItem("caseysStories") || "[]");
+    }
+
+    function saveStories(stories) {
+      localStorage.setItem("caseysStories", JSON.stringify(stories));
+    }
+
+    function renderStories() {
+      const stories = getStories();
+      storiesBox.innerHTML = "";
+
+      if (stories.length === 0) {
+        storiesBox.innerHTML =
+          '<p class="empty">No customer stories have been added on this browser yet. Be the first.</p>';
+        return;
+      }
+
+      stories.slice().reverse().forEach((item) => {
+        const card = document.createElement("article");
+        card.className = "saved-story";
+
+        const heading = document.createElement("h3");
+        heading.textContent = item.name;
+
+        const paragraph = document.createElement("p");
+        paragraph.textContent = item.story;
+
+        card.appendChild(heading);
+        card.appendChild(paragraph);
+        storiesBox.appendChild(card);
+      });
+    }
+
+    form.addEventListener("submit", function (event) {
+      event.preventDefault();
+
+      const name = document.getElementById("name").value.trim();
+      const story = document.getElementById("story").value.trim();
+
+      if (!name || !story) return;
+
+      const stories = getStories();
+      stories.push({ name, story });
+      saveStories(stories);
+
+      form.reset();
+      renderStories();
+    });
+
+    renderStories();
+  </script>
+</body>
+</html>
